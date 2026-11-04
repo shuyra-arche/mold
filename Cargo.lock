@@ -3,7 +3,55 @@
 version = 4
 
 [[package]]
+name = "bitflags"
+version = "2.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3ded4057c258ba199e2d26386d3af3780957ecaee6c4ef4041c6b4b8b97c0b06"
+
+[[package]]
+name = "erra"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bc36b9bc9f9fd011eb63c44cdba19d47c4e77f4759cddb0c448b1d23d27abc1e"
+
+[[package]]
+name = "kernel-api-env"
+version = "0.1.0"
+source = "git+https://github.com/shuyra-arche/kernel.git?rev=a9986c82127cf25183bf5c30e7d42e4a9376b734#a9986c82127cf25183bf5c30e7d42e4a9376b734"
+dependencies = [
+ "bitflags",
+ "erra",
+ "kernel-api-macros",
+ "kernel-api-wire",
+]
+
+[[package]]
+name = "kernel-api-macros"
+version = "0.1.0"
+source = "git+https://github.com/shuyra-arche/kernel.git?rev=a9986c82127cf25183bf5c30e7d42e4a9376b734#a9986c82127cf25183bf5c30e7d42e4a9376b734"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "kernel-api-wire"
+version = "0.1.0"
+source = "git+https://github.com/shuyra-arche/kernel.git?rev=a9986c82127cf25183bf5c30e7d42e4a9376b734#a9986c82127cf25183bf5c30e7d42e4a9376b734"
+
+[[package]]
 name = "mold"
+version = "0.1.0"
+dependencies = [
+ "kernel-api-env",
+ "kernel-api-macros",
+ "kernel-api-wire",
+ "mold-entry",
+]
+
+[[package]]
+name = "mold-entry"
 version = "0.1.0"
 dependencies = [
  "proc-macro2",
