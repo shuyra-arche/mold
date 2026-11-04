@@ -1,12 +1,20 @@
+[workspace]
+resolver = "3"
+members = [".", "entry"]
+
 [package]
 name = "mold"
 version = "0.1.0"
 edition = "2024"
 
 [lib]
-proc-macro = true
+path = "src/lib.rs"
 
 [dependencies]
-proc-macro2 = "1"
-quote = "1"
-syn = { version = "2", features = ["full", "extra-traits"] }
+kernel-api-macros = { git = "https://github.com/shuyra-arche/kernel.git", rev = "a9986c82127cf25183bf5c30e7d42e4a9376b734" }
+mold-entry = { path = "entry" }
+
+# 仅验收用：canonical 的 ABI 两包，与宏同一 SHA、同一份类型定义。
+[dev-dependencies]
+env = { package = "kernel-api-env", git = "https://github.com/shuyra-arche/kernel.git", rev = "a9986c82127cf25183bf5c30e7d42e4a9376b734" }
+wire = { package = "kernel-api-wire", git = "https://github.com/shuyra-arche/kernel.git", rev = "a9986c82127cf25183bf5c30e7d42e4a9376b734" }
