@@ -17,7 +17,7 @@ checksum = "bc36b9bc9f9fd011eb63c44cdba19d47c4e77f4759cddb0c448b1d23d27abc1e"
 [[package]]
 name = "kernel-api-env"
 version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/kernel.git?rev=a9986c82127cf25183bf5c30e7d42e4a9376b734#a9986c82127cf25183bf5c30e7d42e4a9376b734"
+source = "git+https://github.com/shuyra-arche/kernel.git?rev=90d43dbf3ee43fd146f487718eb39e88f2507c05#90d43dbf3ee43fd146f487718eb39e88f2507c05"
 dependencies = [
  "bitflags",
  "erra",
@@ -28,7 +28,7 @@ dependencies = [
 [[package]]
 name = "kernel-api-macros"
 version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/kernel.git?rev=a9986c82127cf25183bf5c30e7d42e4a9376b734#a9986c82127cf25183bf5c30e7d42e4a9376b734"
+source = "git+https://github.com/shuyra-arche/kernel.git?rev=90d43dbf3ee43fd146f487718eb39e88f2507c05#90d43dbf3ee43fd146f487718eb39e88f2507c05"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -38,7 +38,7 @@ dependencies = [
 [[package]]
 name = "kernel-api-wire"
 version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/kernel.git?rev=a9986c82127cf25183bf5c30e7d42e4a9376b734#a9986c82127cf25183bf5c30e7d42e4a9376b734"
+source = "git+https://github.com/shuyra-arche/kernel.git?rev=90d43dbf3ee43fd146f487718eb39e88f2507c05#90d43dbf3ee43fd146f487718eb39e88f2507c05"
 
 [[package]]
 name = "mold"
