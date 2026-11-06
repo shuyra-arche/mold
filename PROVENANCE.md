@@ -1,126 +1,18 @@
-# Provenance
+# Source and attribution
 
-## Source
+This repository derives from `crates/mold` in
+[anreonyr/sqware](https://github.com/anreonyr/sqware/tree/2c17c3877e3f8c67d9db5634d693fa4303d47f8c)
+at `2c17c3877e3f8c67d9db5634d693fa4303d47f8c`. Original history remains available there; subsequent changes
+are recorded in this repository's Git history.
 
-- Repository: <https://github.com/anreonyr/sqware>
-- Commit: `2c17c3877e3f8c67d9db5634d693fa4303d47f8c`
-- Branch at extraction: `codex/shuyra-mold-extraction`
-- Extracted path: `crates/mold`
+`tests/macro_contract.rs` derives from Kernel `api/tests/macro_contract.rs` at
+`a9986c82127cf25183bf5c30e7d42e4a9376b734`. Macro implementation ownership is described in README.
 
-This directory is the initial source snapshot of that commit. The Rust sources
-under `src/` are byte-for-byte copies; `rust-toolchain.toml` is copied unchanged.
-`Cargo.toml` is a new standalone manifest (the upstream manifest inherited
-`version` and `edition` from the workspace), and `Cargo.lock` was generated for
-this crate with `unicode-ident` pinned to the source-verified 1.0.24. At
-extraction time, no source consumer in the upstream repository was changed.
+Recorded source author identities:
 
-## File mapping
+- `anreonyr <88045926+anreonyr@users.noreply.github.com>`
+- `anreonyr <anreonyr@gmail.com>`
 
-| Upstream | Here |
-| --- | --- |
-| `crates/mold/src/codes.rs` | `src/codes.rs` |
-| `crates/mold/src/contract.rs` | `src/contract.rs` |
-| `crates/mold/src/entry.rs` | `src/entry.rs` |
-| `crates/mold/src/envcall.rs` | `src/envcall.rs` |
-| `crates/mold/src/fail.rs` | `src/fail.rs` |
-| `crates/mold/src/frame.rs` | `src/frame.rs` |
-| `crates/mold/src/interface.rs` | `src/interface.rs` |
-| `crates/mold/src/lib.rs` | `src/lib.rs` |
-| `rust-toolchain.toml` | `rust-toolchain.toml` |
-
-The upstream `crates/mold/Cargo.toml` is intentionally not copied; this crate has
-its own explicit `version = "0.1.0"` and `edition = "2024"`.
-
-## Attribution
-
-- anreonyr <88045926+anreonyr@users.noreply.github.com>
-- anreonyr <anreonyr@gmail.com>
-
-## History
-
-The original repository history is retained at the source URL above. This
-extraction is a snapshot without a rewritten or synthesized history.
-
-## Licensing
-
-The source project declares no license. At commit
-`2c17c3877e3f8c67d9db5634d693fa4303d47f8c` no tracked `LICENSE`, `COPYING`, or
-`NOTICE` file matched the project. No license text or license metadata is added
-by this extraction; do not assume a license that the source does not grant.
-
-## Snapshot
-
-The initial source snapshot was taken from the full commit
-`2c17c3877e3f8c67d9db5634d693fa4303d47f8c` above. Consumer switch is recorded by
-subsequent migration PRs in anreonyr/sqware.
-
-## Facade split
-
-Branch `codex/kernel-api-mold-facade`. This crate stops owning the codec /
-contract macros and becomes an ordinary `no_std` facade; only `entry` stays in
-this repository, in its own proc-macro member package.
-
-Current tree:
-
-| Extraction-time location | Now | Note |
-| --- | --- | --- |
-| `crates/mold/src/entry.rs` (`2c17c387`) → `src/entry.rs` | `entry/src/entry.rs` | Moved within this repository byte-for-byte; the file content is still the `2c17c387` source. New owner: `mold-entry` (member package `entry/`). |
-| `crates/mold/src/codes.rs` (`2c17c387`) → `src/codes.rs` | deleted | Implementation is now owned by `kernel-api-macros` at `https://github.com/shuyra-arche/kernel.git` rev `a9986c82127cf25183bf5c30e7d42e4a9376b734` (path `api/macros`). No second copy remains here. |
-| `crates/mold/src/contract.rs` → `src/contract.rs` | deleted | Same owner as above. |
-| `crates/mold/src/envcall.rs` → `src/envcall.rs` | deleted | Same owner as above. |
-| `crates/mold/src/fail.rs` → `src/fail.rs` | deleted | Same owner as above. |
-| `crates/mold/src/frame.rs` → `src/frame.rs` | deleted | Same owner as above. |
-| `crates/mold/src/interface.rs` → `src/interface.rs` | deleted | Same owner as above. |
-| `src/lib.rs` (proc-macro crate entry) | `src/lib.rs` (facade) + `entry/src/lib.rs` (entry wrapper) | Rewritten. The facade body is two `pub use` lines; the seven public macro paths are unchanged. |
-| `Cargo.toml` (standalone package) | workspace root, `members = [".", "entry"]`, `resolver = "3"` | `proc-macro = true` and the old direct `proc-macro2` / `quote` / `syn` dependencies removed from the facade; they now live in `entry/Cargo.toml`. |
-| `rust-toolchain.toml` | `rust-toolchain.toml` | Unchanged. |
-
-Equality of the six relocated macro sources, checked by Root's diff of the
-canonical tree against the old `mold` HEAD: `codes.rs`, `contract.rs`,
-`envcall.rs`, `fail.rs`, and `interface.rs` are byte-identical. `frame.rs`
-differs only in the second line of the top file doc comment — canonical adds
-`，生成物使它自己就是过线的一格` after `与 impl env::wire::Span（结构体归你写——它本就是那张字段表）。`
-No executable token, attribute, diagnostic string, or generated path changed.
-All six expansion bodies are therefore preserved, so every generated item is
-unchanged.
-
-Added by this split (no upstream source): `entry/Cargo.toml`,
-`entry/src/lib.rs` (the `#[proc_macro_attribute] pub fn entry` wrapper plus a
-`compile_fail` doc probe and two `#[cfg(test)]` expansion unit tests — one
-negative (argument rejection) and one positive),
-`tests/macro_contract.rs` (adapted from Kernel `api/tests/macro_contract.rs` at the same SHA),
-`tests/entry.rs`, and `tests/macro_paths.rs`.
-
-`Cargo.lock` was regenerated by Root for this workspace, preserving the original
-registry versions; no stale lock remains. The exact Git pin has been built
-externally.
-
-## Canonical SDK consumer upgrade
-
-Branch `codex/canonical-sdk-consumer`, based on mold commit
-`8e8b1c2bdf188cf01494a3a93398cc77cd12b3e6`. The facade's `kernel-api-macros`
-dependency and its `env` / `wire` development aliases now pin the same public
-Kernel SDK commit, `90d43dbf3ee43fd146f487718eb39e88f2507c05`. The root lockfile
-records those Git sources while retaining the registry versions from the
-baseline lockfile. There are no local source patches in the published manifest.
-
-The earlier equality comparison in "Facade split" describes that historical
-split. At the new SDK commit, `Envcall` generates payload codecs, the return
-enum and pure `decode_return`, plus a hidden generator that Client instantiates
-with its transport. Execution through an enum's `.call()` and API-level
-per-slot functions has moved to Client. The facade still reexports all seven
-macro paths and owns no copy of the canonical implementations.
-
-This upgrade changes no bytes under `entry/` or `tests/`; entry expansion,
-failure assertions and the original fixture provenance remain intact.
-`README.md` and the facade crate documentation describe the current split.
-
-Verification used the installed nightly-2026-10-09 toolchain explicitly:
-7 host tests passed, 1 `compile_fail` doctest passed, and 2 inherited doctests
-remained ignored; `cargo build --lib --target riscv64gc-unknown-none-elf
---locked` passed. Cargo metadata contains one each of `kernel-api-env`,
-`kernel-api-wire` and `kernel-api-macros` at the SDK commit above, and no
-`execution` dependency. The facade remains an ordinary `no_std` library, and
-env / wire remain development-only dependencies. The declared
-nightly-2026-09-04 toolchain was not rerun for this upgrade. Product consumers'
-build and runtime checks are recorded separately.
+The source snapshot did not declare a project license. This file records
+attribution and grants no license; no license or SPDX identifier is inferred.
+Third-party dependencies retain their own licenses.
