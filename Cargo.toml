@@ -11,10 +11,10 @@ edition = "2024"
 path = "src/lib.rs"
 
 [dependencies]
-kernel-api-macros = { git = "https://github.com/shuyra-arche/kernel.git", rev = "a9986c82127cf25183bf5c30e7d42e4a9376b734" }
+kernel-api-macros = { git = "https://github.com/shuyra-arche/kernel.git", rev = "90d43dbf3ee43fd146f487718eb39e88f2507c05" }
 mold-entry = { path = "entry" }
 
 # 仅验收用：canonical 的 ABI 两包，与宏同一 SHA、同一份类型定义。
 [dev-dependencies]
-env = { package = "kernel-api-env", git = "https://github.com/shuyra-arche/kernel.git", rev = "a9986c82127cf25183bf5c30e7d42e4a9376b734" }
-wire = { package = "kernel-api-wire", git = "https://github.com/shuyra-arche/kernel.git", rev = "a9986c82127cf25183bf5c30e7d42e4a9376b734" }
+env = { package = "kernel-api-env", git = "https://github.com/shuyra-arche/kernel.git", rev = "90d43dbf3ee43fd146f487718eb39e88f2507c05" }
+wire = { package = "kernel-api-wire", git = "https://github.com/shuyra-arche/kernel.git", rev = "90d43dbf3ee43fd146f487718eb39e88f2507c05" }

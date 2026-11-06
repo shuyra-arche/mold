@@ -10,8 +10,10 @@
 //! 本 crate 是**普通的 `no_std` 库**，不是 proc-macro crate：它只转出这七枚宏，没有任何
 //! 定义，也不连 `execution`（展开体里的 `execution::boot::entry` 由调用点提供）。
 //!
-//! 转出的宏生成物与拆分前逐字相同：默认 codec 路径仍是 `::env::wire`，`interface` /
-//! `contract` 仍写 `env` / `::env` / `::wire`，`entry` 仍写 `execution::boot::entry`。
+//! `Envcall` 生成 ABI 载荷 codec、`Ret` 和纯 `decode_return`，并提供由 Client 指定
+//! transport 后使用的隐藏生成宏；调用枚举自身不再带执行调用的 `.call()` 或逐槽入口。
+//! 默认 codec 路径仍是 `::env::wire`，`interface` / `contract` 仍写
+//! `env` / `::env` / `::wire`，`entry` 仍写 `execution::boot::entry`。
 
 #![no_std]
 
